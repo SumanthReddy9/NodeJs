@@ -14,14 +14,14 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(bodyParser.json())
 
-mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log("Successfully connected to the database");
-}).catch(err => {
-    console.log('Counld not connected to database....', err);
-    process.exit();
-});
+//mongoose.connect(dbConfig.url, {
+//    useNewUrlParser: true
+//}).then(() => {
+//    console.log("Successfully connected to the database");
+//}).catch(err => {
+//    console.log('Counld not connected to database....', err);
+//    process.exit();
+//});
 const routes  = require('./app/routes/note.routes.js');
 
 app.get('/', (req, res) => {
@@ -58,7 +58,7 @@ app.get('/swagger.json', function(req, res){
 app.use('/', routes);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-
-app.listen(5000, () => {
+var port = process.env.PORT || 5000;
+app.listen(port, () => {
     console.log("Server is listening on port 5000")
 });
